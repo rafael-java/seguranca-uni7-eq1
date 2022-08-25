@@ -1,6 +1,6 @@
 ## Implementar cifra de césar (Cifragem e decifragem)
 
-## Obs: todas as variáveis são globais!
+## Obs: todas as variáveis são globais! Lembrar do modificador "global"
 ## Obs2: Respeitar o local de declaração de variáveis
 ## Obs3: Comentar o bloco de declaração de variáveis de teste antes de commitar
 ## Obs4: não renomear os metodos, ainda. Vamos fazer isso juntos!
@@ -54,17 +54,22 @@
 ## METODO 8 - fácil - MATEUS
 ## método de saída - mostra a mensagem cifrada, ou decifrada, de acordo com metodo1
 ## ENTRADA: variável arrayNovo
-## SAIDA: mostrar pro usuário o arrayNovo, com uma mensagem bonitinha
-
+## SAIDA: arrayNovo convertido em string, com uma mensagem bonitinha
 
 ##** DECLARAÇÃO DE VARIAVEIS - inicio **##
-
+cifrar = False
+mensagem = ""
+chave = 0
+alfabeto = []
+ListaMensagem = []
+arrayNovo = []
+mensagemNova = ""
 ##** DECLARAÇÃO DE VARIAVEIS - fim **##
 
 ## Espaço para criar variáveis de teste - inicio ##
 # Antes de subir, comentar.
-ListaMensagem = ["a", "b", "c"]
-ListaAlfabeto = ["a", "b", "c"]
+## ListaMensagem = ["a", "b", "c"]
+## ListaAlfabeto = ["a", "b", "c"]
 ## Espaço para criar variáveis de teste - fim ##
 
 
