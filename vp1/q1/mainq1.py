@@ -63,48 +63,57 @@
 
 ## Espaço para criar variáveis de teste - inicio ##
 # Antes de subir, comentar.
-ListaMensagem = ["a", "b", "c"]
-ListaAlfabeto = ["a", "b", "c"]
+#ListaMensagem = ["a", "b", "c"]
+#ListaAlfabeto = ["a", "b", "c"]
 ## Espaço para criar variáveis de teste - fim ##
 
 
-def metodo1():
-    print("1")
+print("Cifra de César")
+def metodo1(decifrar):
+    switcher = {
+        0: 0,
+        1: 1,
+    }
+    return switcher.get(decifrar)
 
 
-def metodo2():
-    print("2")
+#def metodo2():
+#    print("2")
 
 
-def metodo3():
-    print("3")
+#def metodo3():
+#    print("3")
 
 
-def metodo4():
-    print("4")
+#def metodo4():
+#    print("4")
 
 
-def metodo5():
-    # dentro de um for...
-    metodo6(posicao)
+#def metodo5():
+#    # dentro de um for...
+#    metodo6(posicao)
 
 
-def metodo6(posicao):
-    metodo7(novaLetra)
+#def metodo6(posicao):
+#    metodo7(novaLetra)
 
 
-def metodo7(novaLetra):
-    print("7")
+#def metodo7(novaLetra):
+#    print("7")
 
 
-def metodo8():
-    print("8")
+#def metodo8():
+#    print("8")
 
 
-def main():
-    metodo1()
-    metodo2()
-    metodo3()
-    metodo4()
-    metodo5()
-    metodo8()
+if __name__ == "__main__":
+    print("Escolha decifrar ou cifrar:")
+    print("decifrar- Opção 1")
+    print("cifrar- Opção 0")
+    cifrar = input()
+    print(metodo1(int(cifrar)))
+#    metodo2()
+#    metodo3()
+#    metodo4()
+#    metodo5()
+#    metodo8()
