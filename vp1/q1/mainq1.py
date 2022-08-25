@@ -24,6 +24,8 @@
 ## EX: [a, b, c, d, e, f...]
 ## ENTRADA: -
 ## SAIDA: variável lista "alfabeto" preenchida
+def metodo3():
+    return ['a', 'b', 'c', 'd', 'e', "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 ## METODO 4 - fácil - RUBENS
 # dividir a mensagem em um array (pesquisar sobre split)
