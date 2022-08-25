@@ -105,22 +105,21 @@ def metodo2():
     chave = c
 
 
-# def metodo3():
-#    print("3")
+def metodo3():
+    print("3")
 
 
-# def metodo4():
-#    print("4")
+def metodo4():
+    print("4")
 
 
-# def metodo5():
-#    # dentro de um for...
-#    metodo6(posicao)
-
-## Teste Rafael - não apagar
-# teste = ["a", "b", "c", "d", "e", "f"]
-# for i in teste:
-#     metodo6(i)
+def metodo5():
+    # dentro de um for...
+    metodo6(posicao)
+    ## Teste Rafael - não apagar
+    # teste = ["a", "b", "c", "d", "e", "f"]
+    # for i in teste:
+    #     metodo6(i)
 
 
 def metodo6(posicao):
@@ -141,8 +140,8 @@ def metodo7(novaLetra):
     arrayNovo.append(novaLetra)
 
 
-# def metodo8():
-#    print("8")
+def metodo8():
+    print("8")
 
 
 def main():
