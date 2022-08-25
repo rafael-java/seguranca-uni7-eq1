@@ -79,7 +79,24 @@ def metodo1():
 
 
 def metodo2():
-    print("2")
+    global mensagem, chave
+    m = input("Escreva a mensagem:")
+    while m == "" or m == " ":
+        print("Mensagem não pode estar em branco")
+        m = input("Escreva a mensagem:")
+
+    c = input("Escreva a chave:")
+    erro = True
+    while erro:
+        try:
+            c = int(c)
+            erro = False
+        except:
+            print("Chave deve ser número, tente novamente")
+            c = input("Escreva a chave:")
+
+    mensagem = m
+    chave = c
 
 
 def metodo3():
@@ -103,16 +120,28 @@ def metodo7(novaLetra):
     print("7")
 
 
+## METODO 7 - fácil - RAFAEL
+# vai ser chamado dentro do método 6 (Acho)
+# converte de array para string
+## ENTRADA: variável "nova letra" - cada uma (que é cifrada)
+## SAIDA: arrayNovo com chars
+
+
 def metodo8():
     print("8")
 
 
 def main():
-    metodo1()
+    # metodo1()
     metodo2()
-    metodo3()
-    metodo4()
-    metodo5()
-    metodo8()
+    print(mensagem)
+    print(chave)
+    # metodo3()
+    # metodo4()
+    # metodo5()
+    # metodo8()
+
+
 main()
+
 ## Falta: colocar isso em um loop
