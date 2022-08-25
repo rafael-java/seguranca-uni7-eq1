@@ -73,8 +73,15 @@ mensagemNova = ""
 ## Espaço para criar variáveis de teste - fim ##
 
 
-def metodo1():
-    print("1")
+print("Cifra de César")
+
+
+def metodo1(decifrar):
+    switcher = {
+        0: 0,
+        1: 1,
+    }
+    return switcher.get(decifrar)
 
 
 def metodo2():
@@ -98,22 +105,22 @@ def metodo2():
     chave = c
 
 
-def metodo3():
-    print("3")
+# def metodo3():
+#    print("3")
 
 
-def metodo4():
-    print("4")
+# def metodo4():
+#    print("4")
 
 
-def metodo5():
-    # dentro de um for...
-    metodo6(posicao)
+# def metodo5():
+#    # dentro de um for...
+#    metodo6(posicao)
 
-    ## Teste Rafael - não apagar
-    # teste = ["a", "b", "c", "d", "e", "f"]
-    # for i in teste:
-    #     metodo6(i)
+## Teste Rafael - não apagar
+# teste = ["a", "b", "c", "d", "e", "f"]
+# for i in teste:
+#     metodo6(i)
 
 
 def metodo6(posicao):
@@ -134,12 +141,17 @@ def metodo7(novaLetra):
     arrayNovo.append(novaLetra)
 
 
-def metodo8():
-    print("8")
+# def metodo8():
+#    print("8")
 
 
 def main():
-    metodo1()
+    if __name__ == "__main__":
+        print("Escolha decifrar ou cifrar:")
+        print("decifrar- Opção 1")
+        print("cifrar- Opção 0")
+        cifrar = input()
+        print(metodo1(int(cifrar)))
     metodo2()
     metodo3()
     metodo4()
