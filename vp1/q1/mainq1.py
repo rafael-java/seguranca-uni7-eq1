@@ -110,19 +110,28 @@ def metodo5():
     # dentro de um for...
     metodo6(posicao)
 
+    ## Teste Rafael - não apagar
+    # teste = ["a", "b", "c", "d", "e", "f"]
+    # for i in teste:
+    #     metodo6(i)
+
 
 def metodo6(posicao):
+    ## Teste Rafael - não apagar
+    # novaLetra = posicao
     metodo7(novaLetra)
 
 
 def metodo7(novaLetra):
-    print("7")
-
-
-## METODO 7 - fácil - RAFAEL
-# vai ser chamado dentro do método 6 (Acho)
-## ENTRADA: variável "nova letra" - cada uma (que é cifrada)
-## SAIDA: arrayNovo com chars
+    erro = True
+    while erro:
+        if not (isinstance(novaLetra, str)):
+            print("Algo deu errado. A nova letra não é uma letra!")
+            raise SystemExit(0)
+        else:
+            erro = False
+    global arrayNovo
+    arrayNovo.append(novaLetra)
 
 
 def metodo8():
@@ -130,14 +139,12 @@ def metodo8():
 
 
 def main():
-    # metodo1()
+    metodo1()
     metodo2()
-    print(mensagem)
-    print(chave)
-    # metodo3()
-    # metodo4()
-    # metodo5()
-    # metodo8()
+    metodo3()
+    metodo4()
+    metodo5()
+    metodo8()
 
 
 main()
