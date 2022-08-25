@@ -1,9 +1,10 @@
 ## Implementar cifra de césar (Cifragem e decifragem)
 
-## Obs: todas as variáveis são globais! Lembrar do modificador "global"
+## Obs: todas as variáveis são globais! Lembrar do modificador "global": https://www.w3schools.com/python/python_variables_global.asp
 ## Obs2: Respeitar o local de declaração de variáveis
 ## Obs3: Comentar o bloco de declaração de variáveis de teste antes de commitar
 ## Obs4: não renomear os metodos, ainda. Vamos fazer isso juntos!
+## Obs5: Lembrar da tratativa de erros!
 
 ## METODO 1 - fácil - LEANDRO
 ## metodo para escolher se vai cifrar ou decifrar
@@ -40,7 +41,7 @@
 # vai ser chamado dentro do método 5
 # a posição que tem a letra + chave = nova letra
 # se nova letra > 26, nova letra = nova letra + 26 (**conferir**) - > se for cifrar
-# se for decifrar -> nova letra = nova letra - 26
+# se for decifrar -> nova letra = nova letra - 26 (**conferir**)
 # salva no novo array
 ## ENTRADA: posição do array que contem a letra
 ## SAIDA: variável "nova letra" (que é cifrada)
@@ -113,3 +114,5 @@ def main():
     metodo4()
     metodo5()
     metodo8()
+main()
+## Falta: colocar isso em um loop
