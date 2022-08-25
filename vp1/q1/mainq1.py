@@ -48,7 +48,6 @@
 
 ## METODO 7 - fácil - RAFAEL
 # vai ser chamado dentro do método 6 (Acho)
-# converte de array para string
 ## ENTRADA: variável "nova letra" - cada uma (que é cifrada)
 ## SAIDA: arrayNovo com chars
 
@@ -122,7 +121,6 @@ def metodo7(novaLetra):
 
 ## METODO 7 - fácil - RAFAEL
 # vai ser chamado dentro do método 6 (Acho)
-# converte de array para string
 ## ENTRADA: variável "nova letra" - cada uma (que é cifrada)
 ## SAIDA: arrayNovo com chars
 
