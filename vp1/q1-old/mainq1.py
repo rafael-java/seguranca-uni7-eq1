@@ -1,4 +1,4 @@
-print ("Implementar cifra de césar (Cifragem e decifragem)")
+## Implementar cifra de césar (Cifragem e decifragem)
 
 ## Obs: todas as variáveis são globais! Lembrar do modificador "global": https://www.w3schools.com/python/python_variables_global.asp
 ## Obs2: Respeitar o local de declaração de variáveis
@@ -6,12 +6,12 @@ print ("Implementar cifra de césar (Cifragem e decifragem)")
 ## Obs4: não renomear os metodos, ainda. Vamos fazer isso juntos!
 ## Obs5: Lembrar da tratativa de erros!
 
-## METODO 1
+## METODO 1 - fácil - LEANDRO
 ## metodo para escolher se vai cifrar ou decifrar
 ## ENTRADA: INPUT vai originar uma variavel (nome: cifrar), tipo: boleana
 ## SAIDA: Variavel (nome: cifrar), tipo: boleana
 
-## METODO 2
+## METODO 2 - médio - RAFAEL
 ## método de entrada - receber mensagem e chave
 ## EX: 'mensagem' e '2'
 ## Dois inputs!
@@ -19,22 +19,19 @@ print ("Implementar cifra de césar (Cifragem e decifragem)")
 ## ENTRADA: -
 ## SAIDA: duas variaveis: mensagem e chave
 
-# METODO 3
-## A lista alfabeto
-
-## METODO 4
+## METODO 4 - fácil - RUBENS
 # dividir a mensagem em um array (pesquisar sobre split)
 ## EX: [m, e, n, s, a, g, e, m]
 ## ENTRADA: variavel "mensagem"
 ## SAIDA: variável ListaMensagem mensagem em forma de lista de chars
 
-## METODO 5
+## METODO 5 - médio - LEANDRO
 # se for qualquer coisa que não esteja no alfabeto (pesquisar sobre função in - if (char not in alfabeto)...), ignora
 # pega a primeira letra, localiza no array de alfabeto (usar um for ou while, e um if), retorna a posição do array que tem a letra
 ## ENTRADA: variável ListaMensagem
 ## SAIDA: posição do array que contem a letra (variavel posicao)
 
-## METODO 6
+## METODO 6 - difícil - RUBENS
 # vai ser chamado dentro do método 5
 # a posição que tem a letra + chave = nova letra
 # se nova letra > 26, nova letra = nova letra + 26 (**conferir**) - > se for cifrar
@@ -43,45 +40,18 @@ print ("Implementar cifra de césar (Cifragem e decifragem)")
 ## ENTRADA: posição do array que contem a letra
 ## SAIDA: variável "nova letra" (que é cifrada)
 
-## METODO 7
+## METODO 7 - fácil - RAFAEL
 # vai ser chamado dentro do método 6 (Acho)
 ## ENTRADA: variável "nova letra" - cada uma (que é cifrada)
 ## SAIDA: arrayNovo com chars
 
-## METODO 8
+## METODO 8 - fácil - MATEUS
 ## método de saída - mostra a mensagem cifrada, ou decifrada, de acordo com metodo1
 ## ENTRADA: variável arrayNovo
 ## SAIDA: arrayNovo convertido em string, com uma mensagem bonitinha
 
 ##** DECLARAÇÃO DE VARIAVEIS - inicio **##
-alfabeto = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-]
+alfabeto = ['a', 'b', 'c', 'd', 'e', "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 cifrar = False
 mensagem = ""
 chave = 0
