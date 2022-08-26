@@ -19,14 +19,6 @@
 ## ENTRADA: -
 ## SAIDA: duas variaveis: mensagem e chave
 
-## METODO 3 - dificil - MATEUS
-## gerar array com o alfabeto
-## EX: [a, b, c, d, e, f...]
-## ENTRADA: -
-## SAIDA: variável lista "alfabeto" preenchida
-def metodo3():
-    return ['a', 'b', 'c', 'd', 'e', "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-
 ## METODO 4 - fácil - RUBENS
 # dividir a mensagem em um array (pesquisar sobre split)
 ## EX: [m, e, n, s, a, g, e, m]
@@ -59,10 +51,10 @@ def metodo3():
 ## SAIDA: arrayNovo convertido em string, com uma mensagem bonitinha
 
 ##** DECLARAÇÃO DE VARIAVEIS - inicio **##
+alfabeto = ['a', 'b', 'c', 'd', 'e', "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 cifrar = False
 mensagem = ""
 chave = 0
-alfabeto = []
 ListaMensagem = []
 arrayNovo = []
 mensagemNova = ""
@@ -143,7 +135,6 @@ def metodo8():
 def main():
     metodo1()
     metodo2()
-    metodo3()
     metodo4()
     metodo5()
     metodo8()
