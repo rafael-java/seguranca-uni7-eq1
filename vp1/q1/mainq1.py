@@ -1,32 +1,97 @@
-print ("Implementar cifra de césar (Cifragem e decifragem)")
+# Opcoes validas para sair
+opcoes_validas_sair = ["xx", "XX", "Xx", "xX"]
 
-## Obs: todas as variáveis são globais! Lembrar do modificador "global": https://www.w3schools.com/python/python_variables_global.asp
-## Obs2: Respeitar o local de declaração de variáveis
-## Obs3: Comentar o bloco de declaração de variáveis de teste antes de commitar
-## Obs4: não renomear os metodos, ainda. Vamos fazer isso juntos!
-## Obs5: Lembrar da tratativa de erros!
 
-## METODO 1
-## metodo para escolher se vai cifrar ou decifrar
-## ENTRADA: INPUT vai originar uma variavel (nome: cifrar), tipo: boleana
-## SAIDA: Variavel (nome: cifrar), tipo: boleana
+def sair():
+    print("encerrando")
+    raise SystemExit(0)
 
-## METODO 2
-## método de entrada - receber mensagem e chave
-## EX: 'mensagem' e '2'
-## Dois inputs!
-## Chave tem que converter do input para integer
-## ENTRADA: -
-## SAIDA: duas variaveis: mensagem e chave
 
-# METODO 3
-## A lista alfabeto
+def converterParaBoolean():
+    erro = True
+    # Permite três tipos de casos, mas no erro só diz que aceita um, para facilitar
+    opcoes_validas_c = ["CIFRAR", "cifrar", "Cifrar"]
+    opcoes_validas_d = ["DECIFRAR", "decifrar", "Decifrar"]
+    opcao = ""
 
-## METODO 4
-# dividir a mensagem em um array (pesquisar sobre split)
-## EX: [m, e, n, s, a, g, e, m]
-## ENTRADA: variavel "mensagem"
-## SAIDA: variável ListaMensagem mensagem em forma de lista de chars
+    # Fica pedindo até ter um resultado certo
+    while erro != False:
+        opcao = input("Voce deseja CIFRAR ou DECIFRAR?")
+
+        # checa se opcao é valida
+        if opcao in opcoes_validas_c or opcao in opcoes_validas_d:
+            erro = False
+            break
+        # checa se opcao é sair
+        elif opcao in opcoes_validas_sair:
+            sair()
+        # checa se opcao é invalida
+        else:
+            print("Error! Você precisa digitar CIFRAR, DECIFRAR, ou xx para sair")
+
+    if opcao in opcoes_validas_c:
+        return True
+    else:
+        return False
+
+
+def pegaMensagemEChave():
+    # Pega a mensagem
+    m = input("Escreva a mensagem:")
+    while m == "" or m == " " or m in opcoes_validas_sair:
+        if m in opcoes_validas_sair:
+            sair()
+        else:
+            print("Mensagem não pode estar em branco")
+            m = input("Escreva a mensagem:")
+
+    # Pega a chave
+    # PERGUNTA: CHAVE PODE SER NEGATIVA?
+    c = input("Escreva a chave:")
+    if c in opcoes_validas_sair:
+        sair()
+    else:
+        erro = True
+        while erro:
+            try:
+                c = int(c)
+                erro = False
+            except:
+                print("Chave deve ser número, tente novamente")
+                c = input("Escreva a chave:")
+
+    # Coloca em um dicionário
+    mensagemChave = {"mensagem": "", "chave": ""}
+    mensagemChave["mensagem"] = m
+    mensagemChave["chave"] = c
+    return mensagemChave
+
+
+# variável que impede de sair, para sair, digite uma opcao valida de sair
+continuar = True
+
+
+# - - - - INICIO - - - - #
+
+print("Implementar cifra de césar (Cifragem e decifragem)")
+print("Digite xx para sair")
+
+alfabeto = []
+# Converte o alfabeto para lista
+alfabeto[:0] = "abcdefghijklmnopqrstuvxywz"
+
+while continuar == True:
+    # deveCifrar = converterParaBoolean()
+    mensagemChave = pegaMensagemEChave()
+    mensagem = mensagemChave["mensagem"]
+    chave = mensagemChave["chave"]
+    print(mensagem, " ", chave)
+    listaMsg = []
+    listaMsg[:0] = mensagem
+    print(listaMsg)
+
+    arrayNovo = []
+    mensagemNova = ""
 
 ## METODO 5
 # se for qualquer coisa que não esteja no alfabeto (pesquisar sobre função in - if (char not in alfabeto)...), ignora
@@ -53,134 +118,32 @@ print ("Implementar cifra de césar (Cifragem e decifragem)")
 ## ENTRADA: variável arrayNovo
 ## SAIDA: arrayNovo convertido em string, com uma mensagem bonitinha
 
-##** DECLARAÇÃO DE VARIAVEIS - inicio **##
-alfabeto = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-]
-cifrar = False
-mensagem = ""
-chave = 0
-ListaMensagem = []
-arrayNovo = []
-mensagemNova = ""
-##** DECLARAÇÃO DE VARIAVEIS - fim **##
+# def metodo5():
+#     # dentro de um for...
+#     metodo6(posicao)
+#     ## Teste Rafael - não apagar
+#     # teste = ["a", "b", "c", "d", "e", "f"]
+#     # for i in teste:
+#     #     metodo6(i)
 
-## Espaço para criar variáveis de teste - inicio ##
-# Antes de subir, comentar.
-## ListaMensagem = ["a", "b", "c"]
-## ListaAlfabeto = ["a", "b", "c"]
-## Espaço para criar variáveis de teste - fim ##
+# def metodo6(posicao):
+#     ## Teste Rafael - não apagar
+#     # novaLetra = posicao
+#     metodo7(novaLetra)
 
+# def metodo7(novaLetra):
+#     erro = True
+#     while erro:
+#         if not (isinstance(novaLetra, str)):
+#             print("Algo deu errado. A nova letra não é uma letra!")
+#             raise SystemExit(0)
+#         else:
+#             erro = False
+#     global arrayNovo
+#     arrayNovo.append(novaLetra)
 
-print("Cifra de César")
-
-
-def metodo1(decifrar):
-    switcher = {
-        0: 0,
-        1: 1,
-    }
-    return switcher.get(decifrar)
-
-
-def metodo2():
-    global mensagem, chave
-    m = input("Escreva a mensagem:")
-    while m == "" or m == " ":
-        print("Mensagem não pode estar em branco")
-        m = input("Escreva a mensagem:")
-
-    c = input("Escreva a chave:")
-    erro = True
-    while erro:
-        try:
-            c = int(c)
-            erro = False
-        except:
-            print("Chave deve ser número, tente novamente")
-            c = input("Escreva a chave:")
-
-    mensagem = m
-    chave = c
-
-
-def metodo3():
-    print("3")
-
-
-def metodo4():
-    print("4")
-
-
-def metodo5():
-    # dentro de um for...
-    metodo6(posicao)
-    ## Teste Rafael - não apagar
-    # teste = ["a", "b", "c", "d", "e", "f"]
-    # for i in teste:
-    #     metodo6(i)
-
-
-def metodo6(posicao):
-    ## Teste Rafael - não apagar
-    # novaLetra = posicao
-    metodo7(novaLetra)
-
-
-def metodo7(novaLetra):
-    erro = True
-    while erro:
-        if not (isinstance(novaLetra, str)):
-            print("Algo deu errado. A nova letra não é uma letra!")
-            raise SystemExit(0)
-        else:
-            erro = False
-    global arrayNovo
-    arrayNovo.append(novaLetra)
-
-
-def metodo8():
-    print("8")
-
-
-def main():
-    if __name__ == "__main__":
-        print("Escolha decifrar ou cifrar:")
-        print("decifrar- Opção 1")
-        print("cifrar- Opção 0")
-        cifrar = input()
-        print(metodo1(int(cifrar)))
-    metodo2()
-    metodo4()
-    metodo5()
-    metodo8()
-
-
-main()
-
-## Falta: colocar isso em um loop
+# def main():
+#     metodo2()
+#     metodo4()
+#     metodo5()
+#     metodo8()
