@@ -3,7 +3,7 @@ opcoes_validas_sair = ["xx", "XX", "Xx", "xX"]
 
 
 def sair():
-    print("encerrando")
+    print("Ok, encerrando")
     raise SystemExit(0)
 
 
@@ -16,7 +16,7 @@ def converterParaBoolean():
 
     # Fica pedindo até ter um resultado certo
     while erro != False:
-        opcao = input("Voce deseja CIFRAR ou DECIFRAR?")
+        opcao = input("Voce deseja CIFRAR ou DECIFRAR? ")
 
         # checa se opcao é valida
         if opcao in opcoes_validas_c or opcao in opcoes_validas_d:
@@ -30,14 +30,18 @@ def converterParaBoolean():
             print("Error! Você precisa digitar CIFRAR, DECIFRAR, ou xx para sair")
 
     if opcao in opcoes_validas_c:
+        print("ok, vamos cifrar")
         return True
     else:
+        print("ok, vamos decifrar")
         return False
 
 
 def pegaMensagemEChave():
     # Pega a mensagem
     m = input("Escreva a mensagem:")
+    # Teste
+    # m = "u v !!! # x z abc fgh iii"
     while m == "" or m == " " or m in opcoes_validas_sair:
         if m in opcoes_validas_sair:
             sair()
@@ -67,83 +71,92 @@ def pegaMensagemEChave():
     return mensagemChave
 
 
-# variável que impede de sair, para sair, digite uma opcao valida de sair
-continuar = True
+def pegarPosicao(listaMensagem, alfabeto, listaPosicoes):
+    for car in listaMensagem:
+        if car in alfabeto:
+            listaPosicoes.append(alfabeto.index(car))
+        else:
+            listaPosicoes.append(car)
+    return listaPosicoes
 
 
-# - - - - INICIO - - - - #
+def calculaQuantoDeveAndar(deveCifrar, listaPosicoes, chave, alfabeto):
+    list = []
+    tamanhoAlf = len(alfabeto)
+    chaveAnterior = chave
+    # Para cada posicao
 
-print("Implementar cifra de césar (Cifragem e decifragem)")
-print("Digite xx para sair")
+    for posicao in listaPosicoes:
+        if type(posicao) == int:
+            chave = chaveAnterior
+            while chave >= tamanhoAlf:
+                chave = chave - tamanhoAlf
+            if deveCifrar:
+                while chave > 0:
+                    posicao = posicao + 1
+                    if (posicao) > tamanhoAlf - 1:
+                        posicao = 0
+                    chave = chave - 1
+            else:
+                while chave > 0:
+                    posicao = posicao - 1
+                    if (posicao) < 0:
+                        posicao = tamanhoAlf - 1
+                    chave = chave - 1
 
-alfabeto = []
-# Converte o alfabeto para lista
-alfabeto[:0] = "abcdefghijklmnopqrstuvxywz"
+        # Salvar a nova posicao na lista nova
+        list.append(posicao)
 
-while continuar == True:
-    # deveCifrar = converterParaBoolean()
-    mensagemChave = pegaMensagemEChave()
-    mensagem = mensagemChave["mensagem"]
-    chave = mensagemChave["chave"]
-    print(mensagem, " ", chave)
+    # Array com novas posições
+    return list
+
+
+def converteParaTexto(listaPosicoes, alfabeto):
+    stri = ""
+
+    for posicao in listaPosicoes:
+        if type(posicao) == int:
+            stri += alfabeto[posicao]
+        else:
+            stri += posicao
+
+    return stri
+
+
+def process(mensagem, chave, deveCifrar):
+    alfabeto = []
+    # Converte o alfabeto para lista
+    alfabeto[:0] = "abcdefghijklmnopqrstuvwxyz"
     listaMsg = []
     listaMsg[:0] = mensagem
-    print(listaMsg)
+    # print(listaMsg)
+    listaPosicoes = []
+    listaPosicoes = pegarPosicao(listaMsg, alfabeto, listaPosicoes)
+    # print(listaPosicoes)
+    listaNovasPosicoes = []
+    listaNovasPosicoes = calculaQuantoDeveAndar(
+        deveCifrar, listaPosicoes, chave, alfabeto
+    )
+    # print(listaNovasPosicoes)
+    stringNova = converteParaTexto(listaNovasPosicoes, alfabeto)
+    return stringNova
 
-    arrayNovo = []
-    mensagemNova = ""
 
-## METODO 5
-# se for qualquer coisa que não esteja no alfabeto (pesquisar sobre função in - if (char not in alfabeto)...), ignora
-# pega a primeira letra, localiza no array de alfabeto (usar um for ou while, e um if), retorna a posição do array que tem a letra
-## ENTRADA: variável ListaMensagem
-## SAIDA: posição do array que contem a letra (variavel posicao)
+def m():
+    # - - - - INICIO - - - - #
+    while True:
+        print("Implementar cifra de césar (Cifragem e decifragem)")
+        print("Digite xx para sair")
+        # Impede de sair, para sair, digite uma opcao valida de sair
+        # deveCifrar = False
+        deveCifrar = converterParaBoolean()
+        mensagemChave = pegaMensagemEChave()
+        mensagem = mensagemChave["mensagem"]
+        chave = mensagemChave["chave"]
+        # chave = 1
+        # print(mensagem, " ", chave)
+        print(process(mensagem, chave, deveCifrar))
 
-## METODO 6
-# vai ser chamado dentro do método 5
-# a posição que tem a letra + chave = nova letra
-# se nova letra > 26, nova letra = nova letra + 26 (**conferir**) - > se for cifrar
-# se for decifrar -> nova letra = nova letra - 26 (**conferir**)
-# salva no novo array
-## ENTRADA: posição do array que contem a letra
-## SAIDA: variável "nova letra" (que é cifrada)
 
-## METODO 7
-# vai ser chamado dentro do método 6 (Acho)
-## ENTRADA: variável "nova letra" - cada uma (que é cifrada)
-## SAIDA: arrayNovo com chars
-
-## METODO 8
-## método de saída - mostra a mensagem cifrada, ou decifrada, de acordo com metodo1
-## ENTRADA: variável arrayNovo
-## SAIDA: arrayNovo convertido em string, com uma mensagem bonitinha
-
-# def metodo5():
-#     # dentro de um for...
-#     metodo6(posicao)
-#     ## Teste Rafael - não apagar
-#     # teste = ["a", "b", "c", "d", "e", "f"]
-#     # for i in teste:
-#     #     metodo6(i)
-
-# def metodo6(posicao):
-#     ## Teste Rafael - não apagar
-#     # novaLetra = posicao
-#     metodo7(novaLetra)
-
-# def metodo7(novaLetra):
-#     erro = True
-#     while erro:
-#         if not (isinstance(novaLetra, str)):
-#             print("Algo deu errado. A nova letra não é uma letra!")
-#             raise SystemExit(0)
-#         else:
-#             erro = False
-#     global arrayNovo
-#     arrayNovo.append(novaLetra)
-
-# def main():
-#     metodo2()
-#     metodo4()
-#     metodo5()
-#     metodo8()
+if __name__ == "__main__":
+    m()
