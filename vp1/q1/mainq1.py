@@ -7,7 +7,7 @@ def sair():
     raise SystemExit(0)
 
 
-def converterParaBoolean():
+def perguntaSobreCifragem():
     erro = True
     # Permite três tipos de casos, mas no erro só diz que aceita um, para facilitar
     opcoes_validas_c = ["CIFRAR", "cifrar", "Cifrar"]
@@ -142,21 +142,22 @@ def process(mensagem, chave, deveCifrar):
     return stringNova
 
 
-def m():
-    # - - - - INICIO - - - - #
+def coleta_dados():
+    # - - - - PARTE 1 - - - - #
     while True:
-        print("Implementar cifra de césar (Cifragem e decifragem)")
+        print("Questão 1. Implementar cifra de césar (Cifragem e decifragem)")
         print("Digite xx para sair")
         # Impede de sair, para sair, digite uma opcao valida de sair
         # deveCifrar = False
-        deveCifrar = converterParaBoolean()
+        deveCifrar = perguntaSobreCifragem()
         mensagemChave = pegaMensagemEChave()
         mensagem = mensagemChave["mensagem"]
         chave = mensagemChave["chave"]
         # chave = 1
         # print(mensagem, " ", chave)
-        print(process(mensagem, chave, deveCifrar))
+        mensagemNova = process(mensagem, chave, deveCifrar)
+        print(mensagemNova)
 
 
 if __name__ == "__main__":
-    m()
+    coleta_dados()
