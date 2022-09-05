@@ -51,6 +51,7 @@ python3 mainq1.py
 - It checks against the alphabet with accent to know which letter it should replace and returns the new letter.
 
 ## calculaQuantoDeveAndar
+<span style='color: red'>- - Most important method - -  </span>
 - It gets the list of dictionaries and runs the same for each dictionary: gather the letter, run against the logic to see which new position it should be, and gets the new character from its respective alphabet.
 - The logic is based on the manual process for the caesar cipher: if it wants to encrypt, it walks one position until the end of the alphabet. If it reaches the end, it starts the alphabet over. If it wants to decrypt, it walks one position until the start of the alphabet. If it reaches the beginning, it goes to the end of the alphabet.
 - It stores the result in a new list of dictionaries.
