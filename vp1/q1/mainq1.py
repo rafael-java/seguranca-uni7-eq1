@@ -71,23 +71,68 @@ def pegaMensagemEChave():
     return mensagemChave
 
 
-def pegarPosicao(listaMensagem, alfabeto, listaPosicoes):
+def pegarPosicao(listaMensagem, listaAlfabetosPossiveis, listaPosicoes):
+
+    alfabeto0 = []
+    alfabeto1 = listaAlfabetosPossiveis[0]
+    alfabeto2 = listaAlfabetosPossiveis[1]
+    alfabeto3 = listaAlfabetosPossiveis[2]
+
+    listaPosicoes = []
     for car in listaMensagem:
-        if car in alfabeto:
-            listaPosicoes.append(alfabeto.index(car))
-        else:
-            listaPosicoes.append(car)
+        caracter = {"char": car, "alfabeto": alfabeto0, "posicao": -1}
+
+        if car in alfabeto3:
+            letraNova = removeAcento(car, alfabeto3)
+            car = letraNova
+
+        if car in alfabeto1:
+            caracter["alfabeto"] = alfabeto1
+            caracter["posicao"] = alfabeto1.index(car)
+        elif car in alfabeto2:
+            caracter["alfabeto"] = alfabeto2
+            caracter["posicao"] = alfabeto2.index(car)
+
+        listaPosicoes.append(caracter)
     return listaPosicoes
 
 
-def calculaQuantoDeveAndar(deveCifrar, listaPosicoes, chave, alfabeto):
-    list = []
-    tamanhoAlf = len(alfabeto)
-    chaveAnterior = chave
-    # Para cada posicao
+def removeAcento(letra, alfabeto3):
+    if alfabeto3.index(letra) >= 0 and alfabeto3.index(letra) < 4:
+        letraNova = "a"
+    elif alfabeto3.index(letra) >= 4 and alfabeto3.index(letra) < 8:
+        letraNova = "A"
+    elif alfabeto3.index(letra) >= 8 and alfabeto3.index(letra) < 13:
+        letraNova = "e"
+    elif alfabeto3.index(letra) >= 13 and alfabeto3.index(letra) < 17:
+        letraNova = "E"
+    elif alfabeto3.index(letra) >= 17 and alfabeto3.index(letra) < 21:
+        letraNova = "i"
+    elif alfabeto3.index(letra) >= 21 and alfabeto3.index(letra) < 25:
+        letraNova = "I"
+    elif alfabeto3.index(letra) >= 25 and alfabeto3.index(letra) < 29:
+        letraNova = "o"
+    elif alfabeto3.index(letra) >= 29 and alfabeto3.index(letra) < 33:
+        letraNova = "O"
+    elif alfabeto3.index(letra) >= 33 and alfabeto3.index(letra) < 37:
+        letraNova = "u"
+    elif alfabeto3.index(letra) >= 37 and alfabeto3.index(letra) < 41:
+        letraNova = "U"
+    return letraNova
 
-    for posicao in listaPosicoes:
-        if type(posicao) == int:
+
+def calculaQuantoDeveAndar(deveCifrar, listaPosicoes, chave):
+    list = []
+    chaveAnterior = chave
+
+    # listaPosicoes = list de caracter
+    # caracter = {"char": car, "alfabeto": alfabeto0, "posicao": -1}
+    for caracter in listaPosicoes:
+        novo = {"char": "", "alfabeto": None, "posicao": -1}
+        tamanhoAlf = len(caracter["alfabeto"])
+        posicao = caracter["posicao"]
+
+        if posicao != -1:
             chave = chaveAnterior
             while chave >= tamanhoAlf:
                 chave = chave - tamanhoAlf
@@ -104,41 +149,61 @@ def calculaQuantoDeveAndar(deveCifrar, listaPosicoes, chave, alfabeto):
                         posicao = tamanhoAlf - 1
                     chave = chave - 1
 
+        novo["char"] = caracter["char"]
+        novo["alfabeto"] = caracter["alfabeto"]
+        novo["posicao"] = posicao
+
         # Salvar a nova posicao na lista nova
-        list.append(posicao)
+        list.append(novo)
 
     # Array com novas posições
     return list
 
 
-def converteParaTexto(listaPosicoes, alfabeto):
+def converteParaTexto(listaPosicoes):
     stri = ""
+    # listaPosicoes = list de novos
+    # novo = {"char": "", "alfabeto": None, "posicao": -1}
 
-    for posicao in listaPosicoes:
-        if type(posicao) == int:
+    for novo in listaPosicoes:
+        if novo["posicao"] != -1:
+            alfabeto = novo["alfabeto"]
+            posicao = novo["posicao"]
             stri += alfabeto[posicao]
         else:
-            stri += posicao
+            stri += novo["char"]
 
     return stri
 
 
+def pegaAlfabetosPossiveis():
+    # Uma lista de alfabetos possiveis
+    alfabetosPossiveis = []
+    alfabeto1 = []
+    alfabeto1[:0] = "abcdefghijklmnopqrstuvwxyz"
+    alfabeto2 = []
+    alfabeto2[:0] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    alfabeto3 = []
+    alfabeto3[:0] = "áàâäÁÀÂÄéèêêëËÊÈÉíìîïÎÌÍÏóòôöÒÓÔÖúùûüÚÙÛÜ"
+    alfabetosPossiveis.append(alfabeto1)
+    alfabetosPossiveis.append(alfabeto2)
+    alfabetosPossiveis.append(alfabeto3)
+    return alfabetosPossiveis
+
+
 def process(mensagem, chave, deveCifrar):
-    alfabeto = []
-    # Converte o alfabeto para lista
-    alfabeto[:0] = "abcdefghijklmnopqrstuvwxyz"
+    # - - - - PARTE 2 - - - - #
+    alfabetosPossiveis = pegaAlfabetosPossiveis()
     listaMsg = []
     listaMsg[:0] = mensagem
     # print(listaMsg)
     listaPosicoes = []
-    listaPosicoes = pegarPosicao(listaMsg, alfabeto, listaPosicoes)
+    listaPosicoes = pegarPosicao(listaMsg, alfabetosPossiveis, listaPosicoes)
     # print(listaPosicoes)
     listaNovasPosicoes = []
-    listaNovasPosicoes = calculaQuantoDeveAndar(
-        deveCifrar, listaPosicoes, chave, alfabeto
-    )
+    listaNovasPosicoes = calculaQuantoDeveAndar(deveCifrar, listaPosicoes, chave)
     # print(listaNovasPosicoes)
-    stringNova = converteParaTexto(listaNovasPosicoes, alfabeto)
+    stringNova = converteParaTexto(listaNovasPosicoes)
     return stringNova
 
 
