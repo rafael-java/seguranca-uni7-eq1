@@ -5,7 +5,7 @@ from secrets import token_bytes
 # chave criptografica
 key = token_bytes(16)
 
-# varáveis globais para receber os códogos hash necessários para a descriptografia
+# variaveis globais para receber os códogos hash necessarios para a descriptografia
 nonce = ""
 ciphertext = ""
 tag = ""
@@ -49,7 +49,7 @@ def message():
 
 
 # criação do menu
-# pergunta pro usuário uma opção de criptografia e descriptografia!
+# pergunta para o usuário uma opção de criptografia e descriptografia!
 def menu():
     aux = True
     while aux == True:
@@ -76,5 +76,5 @@ def menu():
             print("\nOpção inválida")
 
 
-# método pricipa do programa
+# método main
 menu()
