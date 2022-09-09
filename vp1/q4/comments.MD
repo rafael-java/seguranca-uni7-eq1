@@ -7,10 +7,10 @@ cd vp1
 ```
 - After that
 ```
-cd q2
+cd q4
 ```
 - And then run the command
 
 ```
-py mainq2.py
+py mainq4.py
 ```
