@@ -1,16 +1,17 @@
+from email import message
 from Crypto.Cipher import AES
 from secrets import token_bytes
 
 # chave criptografica
 key = token_bytes(16)
 
-global nonce
+# varáveis globais para receber os códogos hash necessários para a descriptografia
+nonce = ""
+ciphertext = ""
+tag = ""
 
-global tag
 
 # função para deceber a mensagem a ser criptografada
-
-
 def encrypt(msg):
     # cria um objeto de cifra com a função new() no módulo Crypto.Cipher
     # o primeiro parâmetro é sempre a chave criptográfica (uma string de bytes)
@@ -36,39 +37,44 @@ def decrypt(nonce, ciphertext, tag):
         return False
 
 
-def mesage():
-    nonce, ciphertext, tag = encrypt(input('Enter a message: '))
-    plaintext = decrypt(nonce, ciphertext, tag)
-    print(f'Cipher text: {ciphertext}')
-    if not plaintext:
-        print('Message is corrupted')
-    else:
-        print(f'Plain text: {plaintext}')
+# solicta ao usuário um texto simples, que é passado ao método encrypt
+# que retorna três códigos hash que são amazenados globalmento para serem usados
+# para descifrar a menssage
+def message():
+    global nonce
+    global ciphertext
+    global tag
+    nonce, ciphertext, tag = encrypt(input('Digite a mensagem: '))
+    print(f'\nTexto cifrado: {ciphertext}')
+
 
 # criação do menu
 # pergunta pro usuário uma opção de criptografia e descriptografia!
 def menu():
-    print('''
-          ======== AES =======
-
-          [C] -> criptografar
-          [D] -> descriptografar
-          [S] -> Sair
-  ''')
-
     aux = True
     while aux == True:
+        print('''
+======== AES =======
+
+[C] -> criptografar
+[D] -> descriptografar
+[S] -> Sair
+        ''')
         option = str(input("Escolha uma opção: ")).lower()
         if option == 'c':
-            mesage()
+            message()
         elif option == 'd':
-            print("Decifrar")
+            plaintext = decrypt(nonce, ciphertext, tag)
+            if not plaintext:
+                print('\nA mensagem está corrompida')
+            else:
+                print(f'\nTexto: {plaintext}')
         elif option == 's':
             aux = False
-            print("Fim")
+            print("\nFim")
         else:
-            print("Opção inválida")
+            print("\nOpção inválida")
 
 
-if __name__ == '__main__':
-    menu()
+# método pricipa do programa
+menu()
