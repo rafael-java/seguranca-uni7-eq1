@@ -1,63 +1,80 @@
-## Utilizando SHA-256 e o AES, implementar o envio de uma mensagem e de um método de verificação de integridade
-
-## 1 passo: Pegar a mensagem 
-## 2 passo: transformar a mensagem em hashcode
-## 3 passo: Concatenar a mensagem e o hash
-## 4 passo: passo 3 criptografado com uma chave
-## 5 passo: descriptografar usando a chave.
-## 6 passo: pegar a mensagem e o hash
-## 7 passo: Transformar o hash em mensagem e ai comparar a mensagem do passo 6 com a mensagem do passo 7.
+from email import message
 from Crypto.Cipher import AES
 from secrets import token_bytes
-import hashlib
-global nonce
-global tag
 
-def cryptoMessageAndHash(messageAndHash, key):
-  # cria um objeto de cifra com a função new() no módulo Crypto.Cipher
-  # o primeiro parâmetro é sempre a chave criptográfica (uma string de bytes)
-  # o segundo parâmetro é sempre a constante que seleciona o modo de operação
-  # nonce (bytes) – o valor do nonce fixo. Deve ser exclusivo para a combinação mensagem/chave.
-  # Se não estiver presente, a biblioteca cria um nonce aleatório (16 bytes para AES)
-  
-  keyToken = token_bytes(int(key))
-  cipher = AES.new(keyToken, AES.MODE_EAX)
-  nonce = cipher.nonce
-  ciphertext, tag = cipher.encrypt_and_digest(messageAndHash.encode('ascii'))
-  print("cryptoMessageAndHash")
-  return nonce, ciphertext, tag
+# chave criptografica
+key = token_bytes(16)
 
-def createHash(message):
-  
-  sha256 = hashlib.sha256()
-  sha256.update(message.encode('utf-8'))
-  return sha256.hexdigest()
-
-def message(): 
-  message = input("Digite sua mensagem: ")
-  key = input("Insira a chave que deseja para criptografar: ")
-  messageHash = createHash(message)
-  messageAndHash = message + "|" + messageHash 
-  nonce, ciphertext, tag = cryptoMessageAndHash(messageAndHash, key)
+# variaveis globais para receber os códogos hash necessarios para a descriptografia
+nonce = ""
+ciphertext = ""
+tag = ""
 
 
+# função para deceber a mensagem a ser criptografada
+def encrypt(msg):
+    # cria um objeto de cifra com a função new() no módulo Crypto.Cipher
+    # o primeiro parâmetro é sempre a chave criptográfica (uma string de bytes)
+    # o segundo parâmetro é sempre a constante que seleciona o modo de operação
+    # nonce (bytes) – o valor do nonce fixo. Deve ser exclusivo para a combinação mensagem/chave.
+    # Se não estiver presente, a biblioteca cria um nonce aleatório (16 bytes para AES)
+    cipher = AES.new(key, AES.MODE_EAX)
+    nonce = cipher.nonce
+    ciphertext, tag = cipher.encrypt_and_digest(msg.encode('ascii'))
+    return nonce, ciphertext, tag
+
+
+# função que recebe três valores para descriptografar a mensagem
+# Se não estiver presente, a biblioteca cria um nonce aleatório (16 bytes para AES)
+# faz a verificação da chave e retorna a mensagem descriptografada
+def decrypt(nonce, ciphertext, tag):
+    cipher = AES.new(key, AES.MODE_EAX, nonce=nonce)
+    plaintext = cipher.decrypt(ciphertext)
+    try:
+        cipher.verify(tag)
+        return plaintext.decode('ascii')
+    except:
+        return False
+
+
+# solicta ao usuário um texto simples, que é passado ao método encrypt
+# que retorna três códigos hash que são amazenados globalmento para serem usados
+# para descifrar a menssage
+def message():
+    global nonce
+    global ciphertext
+    global tag
+    nonce, ciphertext, tag = encrypt(input('Digite a mensagem: '))
+    print(f'\nTexto cifrado: {ciphertext}')
+
+
+# criação do menu
+# pergunta para o usuário uma opção de criptografia e descriptografia!
 def menu():
-  print('''
-            ======== AES =======
+    aux = True
+    while aux == True:
+        print('''
+======== AES =======
 
-            [1] -> Enviar mensagem criptografada
-            [2] -> Sair
-    ''')
-  aux = True
-  while aux == True:
-      option = str(input("Escolha uma opção: ")).lower()
-      if option == '1':
-          message()
-      elif option == '2':
-          aux = False
-          print("Fim")
-      else:
-          print("Opção inválida")
+[C] -> criptografar
+[D] -> descriptografar
+[S] -> Sair
+        ''')
+        option = str(input("Escolha uma opção: ")).lower()
+        if option == 'c':
+            message()
+        elif option == 'd':
+            plaintext = decrypt(nonce, ciphertext, tag)
+            if not plaintext:
+                print('\nA mensagem está corrompida')
+            else:
+                print(f'\nTexto: {plaintext}')
+        elif option == 's':
+            aux = False
+            print("\nFim")
+        else:
+            print("\nOpção inválida")
 
-if __name__ == '__main__':
-  menu()
+
+# método main
+menu()
