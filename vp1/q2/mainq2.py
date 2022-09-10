@@ -1,4 +1,3 @@
-from email import message
 from Crypto.Cipher import AES
 from secrets import token_bytes
 
@@ -26,7 +25,7 @@ def encrypt(msg):
 
 # função que recebe três valores para descriptografar a mensagem
 # Se não estiver presente, a biblioteca cria um nonce aleatório (16 bytes para AES)
-# faz a verivicação da chave e retorna a mensagem descriptografada
+# faz a verificação da chave e retorna a mensagem descriptografada
 def decrypt(nonce, ciphertext, tag):
     cipher = AES.new(key, AES.MODE_EAX, nonce=nonce)
     plaintext = cipher.decrypt(ciphertext)
